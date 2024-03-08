@@ -1,4 +1,4 @@
-function isPowerOfTwo(n: number) {
+export function isPowerOfTwo(n: number) {
     if (n < 1) {
         return false;
     }
@@ -11,7 +11,6 @@ function isPowerOfTwo(n: number) {
     return true;
 }
 
-console.log(isPowerOfTwo(1))
-console.log(isPowerOfTwo(4))
-console.log(isPowerOfTwo(256))
-console.log(isPowerOfTwo(1000))
+
+
+
