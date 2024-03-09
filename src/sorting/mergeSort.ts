@@ -19,6 +19,3 @@ function merge(leftArr: Array<number>, rightArr: Array<number>): Array<number> {
     }
     return [...sortedArr, ...leftArr, ...rightArr];
 }
-
-const arr = [-1, -6, 3, 7, 2, 1];
-console.log(mergeSort(arr));
