@@ -1,8 +1,8 @@
 import { test, expect } from 'bun:test';
-import { bubbleSort } from '../bubbleSort';
-import { insertionSort } from '../insertionSort';
-import { mergeSort } from '../mergeSort';
-import { quickSort } from '../quickSort';
+import { bubbleSort } from '../BubbleSort';
+import { insertionSort } from '../InsertionSort';
+import { mergeSort } from '../MergeSort';
+import { quickSort } from '../QuickSort';
 
 const unsortedArray1 = [5, 3, 8, 4, 2, 1, 9, 7, 6];
 const unsortedArray2 = [5, 3, -8, 4, -2, 1, -9, 7, 6];
