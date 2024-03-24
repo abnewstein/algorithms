@@ -148,6 +148,20 @@ class LinkedList<T> {
         }
     }
 
+    reverse(): void {
+        let current = this.head;
+        let previous: Node<T> | null = null;
+        let next: Node<T> | null = null;
+        while (current) {
+            next = current.next;
+            current.next = previous;
+            previous = current;
+            current = next;
+        }
+        this.tail = this.head;
+        this.head = previous;
+    }
+
     toArray(): T[] {
         const array: T[] = [];
         let current = this.head;
