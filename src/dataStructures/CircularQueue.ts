@@ -1,27 +1,33 @@
 class CircularQueue<T> {
-    private items: { [key: number]: T } = {};
+    private items: Array<T> = [];
     private max: number;
-    private rear: number = 0;
-    private front: number = 0;
+    private currentLength: number = 0;
+    private rear: number = -1;
+    private front: number = -1;
 
     constructor(size: number) {
+        this.items = new Array(size);        
         this.max = size;
     }
 
     isFull(): boolean {
-        return (this.rear + 1) % this.max === this.front;
+        return this.currentLength === this.max;
     }
 
     isEmpty(): boolean {
-        return this.front === this.rear;
+        return this.currentLength === 0;
     }
 
     enqueue(element: T): boolean {
         if (this.isFull()) {
             return false;
         }
+        this.rear++;
         this.items[this.rear] = element;
-        this.rear = (this.rear + 1) % this.max;
+        this.currentLength++;
+        if (this.front === -1) {
+            this.front = this.rear;
+        }
         return true;
     }
 
@@ -29,10 +35,16 @@ class CircularQueue<T> {
         if (this.isEmpty()) {
             return undefined;
         }
-        const result = this.items[this.front];
-        delete this.items[this.front];
-        this.front = (this.front + 1) % this.max;
-        return result;
+        const element = this.items[this.front];
+        this.front++;
+        this.currentLength--;
+        if (this.front === this.rear) {
+            this.front = -1;
+            this.rear = -1;
+        } else if (this.front === this.max) {
+            this.front = 0;
+        }
+        return element;
     }
 
     peek(): T | undefined {
@@ -42,29 +54,16 @@ class CircularQueue<T> {
         return this.items[this.front];
     }
 
-    size(): number {
-        return (this.max - this.front + this.rear) % this.max;
+    get size(): number {
+        return this.currentLength;
     }
 
     print(): void {
-        if (this.isEmpty()) {
-            console.log('Queue is empty');
-            return;
+        let str = '';
+        for (let i = 0; i < this.currentLength; i++) {
+            str += this.items[i] + ' ';
         }
-        let result = '';
-        if (this.rear > this.front) {
-            for (let i = this.front; i < this.rear; i++) {
-                result += this.items[i] + ' ';
-            }
-        } else {
-            for (let i = this.front; i < this.max; i++) {
-                result += this.items[i] + ' ';
-            }
-            for (let i = 0; i < this.rear; i++) {
-                result += this.items[i] + ' ';
-            }
-        }
-        console.log(result);
+        console.log(str);
     }
 }
 
